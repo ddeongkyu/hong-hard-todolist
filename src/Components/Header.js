@@ -22,11 +22,28 @@ function Main() {
         text,
         period: selected,
       });
+      console.log(nextTodoList);
       dispatch(setTodos(nextTodoList));
       dispatch(setText(""));
       inputRef.current.focus();
     } else if (!text) {
       alert("EMPTY!");
+    }
+  };
+  const onEnterPress = (e) => {
+    if (e.key === "Enter") {
+      if (text) {
+        const nextTodoList = todos.concat({
+          id: getRandomTodoId(),
+          text,
+          period: selected,
+        });
+        dispatch(setTodos(nextTodoList));
+        dispatch(setText(""));
+        inputRef.current.focus();
+      } else if (!text) {
+        alert("EMPTY!");
+      }
     }
   };
   const onClickReset = (e) => {
@@ -58,6 +75,7 @@ function Main() {
           type={text}
           value={text}
           onChange={onChangeInput}
+          onKeyDown={onEnterPress}
           className="HeaderInput"
           placeholder="버켓리스트를 입력하세요!"
         />

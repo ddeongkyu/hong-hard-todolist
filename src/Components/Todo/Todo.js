@@ -12,10 +12,12 @@ function Todo() {
     dispatch(setTodos(filteredTodos));
   };
   const handleSelect = (e, id) => {
-    setSelected(e.target.value);
-    console.log(selected);
-    const aa = todos.map((a) => (a.id === id ? { ...a, period: selected } : a));
-    dispatch(setTodos(aa));
+    const { value } = e.target;
+    setSelected(value);
+    const changePeriod = todos.map((toods) =>
+      toods.id === id ? { ...toods, period: value } : toods
+    );
+    dispatch(setTodos(changePeriod));
   };
   const periodMenu = ["무기한", "1년", "10년"];
   return (
@@ -31,7 +33,7 @@ function Todo() {
                 <div className="todos-oneYear-style-box">{content.text}</div>
                 <select
                   className="HeaderSelect"
-                  onChange={handleSelect}
+                  onChange={(e) => handleSelect(e, content.id)}
                   value={selected}
                 >
                   <option value="" defaultValue disabled hidden>

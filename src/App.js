@@ -1,5 +1,5 @@
 import React from "react";
-import "./App.css";
+import "./style.scss";
 import Main from "./Components/Header";
 import Todo from "./Components/Todo/Todo";
 function App() {
